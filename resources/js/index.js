@@ -60,6 +60,7 @@ const nextAndPrevButtonsSection = document.querySelector("#nextAndPrevButtons");
 const scoreDiv = document.querySelector("#scoreDiv");
 const scoreText = document.querySelector("#score");
 const playAgainButton = document.querySelector("#restart");
+const quizSection = document.querySelector(".quiz-container");
 
 // copy the array of questions
 let unansweredQuestions = questions.slice();
@@ -124,17 +125,15 @@ function hideAndShowScoreDiv(isGameOver){
   if(isGameOver){
     scoreDiv.style.display = "flex";
 
-    questionTitle.classList.add("collapsed");
-    optionsSection.classList.add("collapsed");
-
-    nextAndPrevButtonsSection.classList.add("collapsed");
+    questionTitle.remove();
+    optionsSection.remove();
+    nextAndPrevButtonsSection.remove();
   } else {
     scoreDiv.style.display = "none";
 
-    questionTitle.classList.remove("collapsed");
-    optionsSection.classList.remove("collapsed");
-
-    nextAndPrevButtonsSection.classList.remove("collapsed");
+    quizSection.append(questionTitle);
+    quizSection.append(optionsSection);
+    quizSection.append(nextAndPrevButtonsSection);
   }
 }
 
@@ -150,7 +149,6 @@ function generateOptionButtons(question){
     newButton.setAttribute("value", option);
 
     optionsSection.appendChild(newButton);
-    // document.body.appendChild(newButton)
   })
 }
 
@@ -172,9 +170,3 @@ function checkAnswer(answer){
     answer.classList.add("wrong");
   }
 }
-
-// document.addEventListener("keydown", keyDownEventListener);
-
-// function keyDownEventListener(event){
-//   console.log(event);
-// }
